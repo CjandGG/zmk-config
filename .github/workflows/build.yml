@@ -1,6 +1,7 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
-
-jobs:
-  build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+strategy:
+  matrix:
+    board:
+      - nrfmicro_13  # 或其他你实际使用的主控板
+    shield:
+      - cj_a_left
+      - cj_a_right
