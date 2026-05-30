@@ -1,6 +1,6 @@
 #include <nordic/nrf52840_qiaa.dtsi>
 #include <dt-bindings/zmk/matrix_transform.h>
-#include <cj_a-layouts.dtsi>
+#include "cj_a-layouts.dtsi"
 
 / {
     model = "CJ_A";
