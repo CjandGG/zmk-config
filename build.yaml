@@ -17,19 +17,15 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
-jobs:
-  build:
-    strategy:
-      matrix:
-        include:
-          - board: nrfmicro_13           # 改为你实际的主控板
-            shield: cj_a_left
-            artifact-name: cj_a_left
-            shield: cj_a_left nice_oled
-            artifact-name: cj_a_left_oled
+include:
+  - board: nrfmicro_13           # 改为你实际的主控板
+    shield: cj_a_left
+    artifact-name: cj_a_left
+    shield: cj_a_left nice_oled
+    artifact-name: cj_a_left_oled
           
-          - board: nrfmicro_13
-            shield: cj_a_right
-            artifact-name: cj_a_right
-            shield: cj_a_left cj_a_right_oled
-            artifact-name: cj_a_right_oled
+  - board: nrfmicro_13
+    shield: cj_a_right
+    artifact-name: cj_a_right
+    shield: cj_a_left cj_a_right_oled
+    artifact-name: cj_a_right_oled
