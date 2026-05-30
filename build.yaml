@@ -18,13 +18,13 @@
 #     artifact-name: corne_left_with_studio
 #
 include:
-  - board: nrfmicro_13           # 改为你实际的主控板
+  - board: nice_nano_v2           # 改为你实际的主控板
     shield: cj_a_left
     artifact-name: cj_a_left
     shield: cj_a_left nice_oled
     artifact-name: cj_a_left_oled
           
-  - board: nrfmicro_13
+  - board: nice_nano_v2
     shield: cj_a_right
     artifact-name: cj_a_right
     shield: cj_a_left cj_a_right_oled
