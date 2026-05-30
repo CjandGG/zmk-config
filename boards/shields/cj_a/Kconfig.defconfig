@@ -1,23 +1,23 @@
-# This file was generated from a template. Edit it to match your keyboard.
-# See https://docs.zephyrproject.org/4.1.0/hardware/porting/board_porting.html#write-kconfig-files
-# for more information.
-
-if BOARD_CJ_A
+if SHIELD_CJ_A_LEFT
 
 config ZMK_KEYBOARD_NAME
-    default "CJ_A"
+    default "CJ A Left"
 
-if USB
-
-config USB_NRFX
+config ZMK_SPLIT_ROLE_CENTRAL
     default y
 
-config USB_DEVICE_STACK
+endif
+
+if SHIELD_CJ_A_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "CJ A Right"
+
+endif
+
+if SHIELD_CJ_A_LEFT || SHIELD_CJ_A_RIGHT
+
+config ZMK_SPLIT
     default y
 
-endif # USB
-
-config BT_CTLR
-    default BT
-
-endif # BOARD_CJ_A
+endif
