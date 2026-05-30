@@ -4,7 +4,7 @@
 #include <physical_layouts.dtsi>
 
 / {
-    cj_a_physical_layouts: cj_a_physical_layouts {
+    cj_a_physical_layout: cj_a_physical_layout {
         compatible = "zmk,physical-layout";
         display-name = "cj_a";
         transform = <&default_transform>;
