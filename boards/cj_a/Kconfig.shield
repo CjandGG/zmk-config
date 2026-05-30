@@ -1,5 +1,4 @@
-config SHIELD_SOFLE_LEFT
+config SHIELD_CJ_A_LEFT
     def_bool $(shields_list_contains,cj_a_left)
-
-config SHIELD_SOFLE_RIGHT
+config SHIELD_CJ_A_RIGHT
     def_bool $(shields_list_contains,cj_a_right)
