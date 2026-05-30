@@ -1,7 +1,8 @@
-// This file was generated from a template. Edit it to match your keyboard.
-// See https://docs.zephyrproject.org/4.1.0/hardware/porting/board_porting.html
-// and https://zmk.dev/docs/development/hardware-integration/new-shield for more
-// instructions.
+/*
+ * This file was generated from a template. Edit it to match your keyboard.
+ * See https://zmk.dev/docs/development/hardware-integration/new-shield for more instructions.
+ */
+
 
 
 #include <nordic/nrf52840_qiaa.dtsi>
