@@ -12,7 +12,6 @@
         // Uncomment this if you enabled one of the "vddh" nodes below.
         // zmk,battery = &vbatt;
         zmk,kscan = &kscan;
-        zmk,physical-layout = &default_layout;
     };
 
     kscan: kscan {
