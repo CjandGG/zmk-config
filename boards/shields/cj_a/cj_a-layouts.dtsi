@@ -4,9 +4,9 @@
 #include <physical_layouts.dtsi>
 
 / {
-    default_layout: default_layout {
+    cj_a_physical_layouts: cj_a_physical_layouts {
         compatible = "zmk,physical-layout";
-        display-name = "Default Layout";
+        display-name = "cj_a";
         transform = <&default_transform>;
         kscan = <&kscan>;
 
