@@ -65,7 +65,7 @@
          //com-invdir;
          //com-sequential;
          //inversion-on;
-         prechargep = <0xf1>;
+         prechargep = <0x22>;
      };
  };
 
