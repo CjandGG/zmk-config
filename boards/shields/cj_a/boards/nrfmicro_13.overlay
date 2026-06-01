@@ -61,10 +61,10 @@
         page-offset = <0>;
         display-offset = <0>;
         multiplex-ratio = <31>;
-        segment-remap;          // 取消注释（常见）
-        com-sequential;         // 取消注释（常见）
-        com-invdir;          // 保持注释
-        inversion-on;        // 保持注释
+        segment-remap;          
+        com-sequential;         
+        com-invdir;          
+        inversion-on;        
         prechargep = <0x22>; 
      };
  };
