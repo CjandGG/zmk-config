@@ -22,7 +22,6 @@ if SHIELD_CJ_A_LEFT || SHIELD_CJ_A_RIGHT
 config ZMK_SPLIT
     default y
 
-# 显示屏相关配置（如果你有 OLED）
 if ZMK_DISPLAY
 
 config I2C
@@ -31,9 +30,9 @@ config I2C
 config SSD1306
     default y
 
-choice LV_COLOR_DEPTH
-    default LV_COLOR_DEPTH_1
-endchoice
+endif # ZMK_DISPLAY
+
+if LVGL
 
 config LV_Z_VDB_SIZE
     default 64
@@ -44,7 +43,11 @@ config LV_DPI_DEF
 config LV_Z_BITS_PER_PIXEL
     default 1
 
-endif # ZMK_DISPLAY
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_1
+endchoice
+
+endif # LVGL
 
 # RGB 底灯（如果有）
 if ZMK_RGB_UNDERGLOW
