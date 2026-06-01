@@ -1,6 +1,91 @@
-name: Build ZMK firmware
-on: [push, pull_request, workflow_dispatch]
+name: Build ZMK Firmware
+
+on:
+  push:
+    paths:
+      - 'config/**'
+      - 'boards/**'
+      - 'shields/**'
+      - 'west.yml'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # 左半部分（中央侧，启用 Studio）
+          - board: nrfmicro_13          # 主控板型号，根据实际修改
+            shield: cj_a_left
+            snippet: studio-rpc-usb-uart
+            cmake-args: -DCONFIG_ZMK_STUDIO=y
+          # 右半部分（外围侧）
+          - board: nrfmicro_13
+            shield: cj_a_right
+            # 右侧不需要 snippet 和 cmake-args，除非需要调试
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # --------------------------------------------------------------
+      # 关键：缓存 west 模块（避免每次 west update）
+      # --------------------------------------------------------------
+      - name: Cache west modules
+        uses: actions/cache@v4
+        id: cache-west
+        with:
+          path: |
+            zmk/.west
+            zmk/bootloader
+            zmk/modules
+            zmk/tools
+            zmk/zephyr
+          # 缓存键基于 west.yml 的哈希值（清单变化则缓存失效）
+          key: west-${{ hashFiles('west.yml') }}
+          restore-keys: |
+            west-
+
+      - name: West Init
+        if: steps.cache-west.outputs.cache-hit != 'true'
+        run: west init -l zmk/app
+
+      - name: West Update
+        if: steps.cache-west.outputs.cache-hit != 'true'
+        run: west update
+
+      - name: West Zephyr Export
+        if: steps.cache-west.outputs.cache-hit != 'true'
+        run: west zephyr-export
+
+      - name: Install Python Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r zmk/zephyr/scripts/requirements.txt
+
+      # --------------------------------------------------------------
+      # 构建固件
+      # --------------------------------------------------------------
+      - name: West Build (${{ matrix.shield }})
+        run: |
+          cd zmk/app
+          west build -b ${{ matrix.board }} \
+            -d build/${{ matrix.shield }} \
+            -- -DSHIELD=${{ matrix.shield }} \
+            -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" \
+            ${{ matrix.snippet && format('-S {0}', matrix.snippet) || '' }} \
+            ${{ matrix.cmake-args && format('-D{0}', matrix.cmake-args) || '' }}
+
+      - name: Rename Artifacts
+        run: |
+          cp zmk/app/build/${{ matrix.shield }}/zephyr/zmk.uf2 \
+             zmk_${{ matrix.board }}_${{ matrix.shield }}.uf2
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware_${{ matrix.board }}_${{ matrix.shield }}
+          path: zmk_${{ matrix.board }}_${{ matrix.shield }}.uf2
