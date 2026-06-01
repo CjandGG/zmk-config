@@ -63,9 +63,9 @@
         multiplex-ratio = <31>;
         segment-remap;          // 取消注释（常见）
         com-sequential;         // 取消注释（常见）
-        // com-invdir;          // 保持注释
-        // inversion-on;        // 保持注释
-        prechargep = <0xF1>; 
+        com-invdir;          // 保持注释
+        inversion-on;        // 保持注释
+        prechargep = <0x22>; 
      };
  };
 
