@@ -13,7 +13,7 @@
         // zmk,battery = &vbatt;
         zmk,kscan = &kscan;
         zmk,physical-layout = &cj_a_physical_layout;
-        zephyr,display = &oled;
+        zephyr,display = &i2c0;
     };
 
 
