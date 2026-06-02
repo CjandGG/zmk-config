@@ -14,6 +14,7 @@
         // zmk,battery = &vbatt;
         zmk,kscan = &kscan;
         zmk,physical-layout = &cj_a_physical_layout;
+        zephyr,display = &oled;
     };
 
 
@@ -114,10 +115,5 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)                 RC(3,6) RC(3,7) 
             multiplex-ratio = <31>;
             prechargep = <0x22>;
         };
-    };
-};
-/ {
-    chosen {
-        zephyr,display = &oled;
     };
 };
