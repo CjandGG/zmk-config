@@ -102,7 +102,7 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)                 RC(3,6) RC(3,7) 
     pinctrl-0 = <&i2c0_default>;
     pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
-    clock-frequency = <100000>;          // 强制降低到 100kHz
+    clock-frequency = <4000>;          // 强制降低到 100kHz
 
      oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
