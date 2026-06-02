@@ -1,5 +1,4 @@
 #include <dt-bindings/led/led.h>
-#include "nrfmicro_13-pinctrl.dtsi"
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -32,7 +31,7 @@
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        chain-length = <29>; /* arbitrary; change at will */
+        chain-length = <36>; /* arbitrary; change at will */
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
 
@@ -44,34 +43,8 @@
     };
 };
 
-&i2c0 {
-    compatible = "nordic,nrf-twim";
-    status = "okay";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep";
-    clock-frequency = <I2C_BITRATE_STANDARD>; 
- 
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <32>;
-        segment-offset = <0>;
-        page-offset = <0>;
-        display-offset = <0>;
-        multiplex-ratio = <31>;
-        segment-remap;
-        com-sequential;         
-        com-invdir;          
-        inversion-on;        
-        prechargep = <0x22>; 
-     };
- };
-
 / {
     chosen {
         zmk,underglow = &led_strip;
-        zephyr,display = &oled;
     };
 };
