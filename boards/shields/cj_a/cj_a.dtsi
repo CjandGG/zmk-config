@@ -6,15 +6,16 @@
     compatible = "cj_a";
 
     chosen {
-        zephyr,code-partition = &code_partition;
-        zephyr,sram = &sram0;
-        zephyr,flash = &flash0;
+        //zephyr,code-partition = &code_partition;
+        //zephyr,sram = &sram0;
+        //zephyr,flash = &flash0;
         // Uncomment this if you enabled one of the "vddh" nodes below.
         // zmk,battery = &vbatt;
         zmk,kscan = &kscan;
         zmk,physical-layout = &cj_a_physical_layout;
         zephyr,display = &oled;
     };
+    i2c0: &i2c0 { };
 
     kscan: kscan {
         // If the hardware does not use a switch matrix, change this to the
@@ -79,30 +80,12 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5)                 RC(3,6) RC(3,7) 
     };
 };
 
-&pinctrl {
-    i2c0_default: i2c0_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
-       };
-    };
-    i2c0_sleep: i2c0_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
-            low-power-enable;
-       };
-    };
-};
-
-
 
 &i2c0 {
-    compatible = "nordic,nrf-twim";
     status = "okay";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;
-    pinctrl-names = "default", "sleep"; 
+    sda-pin = <0 17>;
+    scl-pin = <0 20>;  
+
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
