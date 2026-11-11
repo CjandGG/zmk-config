@@ -17,21 +17,21 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
----
 include:
-  # 左半 - 无 OLED
-  - board: nrfmicro_13
-    shield: cj_alice
-    artifact-name: cj_alice
+  - board: nrfmicro_13           # 改为你实际的主控板
+    shield: cj_a_left
+    artifact-name: cj_a_left
+    shield: cj_a_left nice_oled
+    artifact-name: cj_a_left_oled
     snippet: studio-rpc-usb-uart
-
-  # 右半 - 无 OLED
+    
   - board: nrfmicro_13
     shield: cj_a_right
     artifact-name: cj_a_right
+    shield: cj_a_left cj_a_right_oled
+    artifact-name: cj_a_right_oled
     snippet: studio-rpc-usb-uart
-
-  # 复位
+  
   - board: nrfmicro_13
     shield: settings_reset
     artifact-name: settings_reset
